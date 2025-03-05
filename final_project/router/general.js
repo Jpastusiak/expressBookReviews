@@ -7,7 +7,7 @@ let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
 
-public_users.post("/register", (req,res) => {
+public_users.post("/registerBook", (req,res) => {
   //Write your code here
   return res.status(300).json({message: "Yet to be implemented"});
 });
@@ -28,20 +28,29 @@ public_users.get('/isbn/:isbn',function (req, res) {
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    // Extract the author parameter from the request URL
+    let author = req.params.author;
+    // Filter the books array to find which book matches the extracted author parameter
+    let filtered_author = Object.keys(books).map(key => books[key]).filter(book => book.author.toLowerCase().includes(author.toLowerCase()));
+    res.send(JSON.stringify(filtered_author));
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+    // Extract the title parameter from the request URL
+    let title = req.params.title;
+    // Filter the books array to find whose book matches the extracted title parameter
+    let filtered_title = Object.keys(books).map(key => books[key]).filter(book => book.title.toLowerCase().includes(title.toLowerCase()));
+    res.send(JSON.stringify(filtered_title))
+  });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    // Extract the isbn parameter from the request URL
+    let isbn = req.params.isbn;
+    // Find the book by ISBN
+    let book = Object.values(books).find(book => book.isbn === isbn);
+    res.send(JSON.stringify({ title: book.title, review: book.reviews }));
 });
 
 module.exports.general = public_users;
