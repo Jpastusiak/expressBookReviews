@@ -1,3 +1,5 @@
+//This contains the skeletal implementations for the routes which a general user can access.
+
 const express = require('express');
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
