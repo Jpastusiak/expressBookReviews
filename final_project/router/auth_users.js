@@ -1,5 +1,3 @@
-//This contains the skeletal implementations for the routes which an authorized user can access.
-
 const express = require('express');
 const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
